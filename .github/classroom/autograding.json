@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "Conference Proceedings",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k TestConferenceProceedings -rap",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 15
+    },
+    {
+      "name": "Articles",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k TestArticle -rap",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 5
+    },
+    {
+      "name": "Journals",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k TestJournal -rap  ",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 9
+    },
+    {
+      "name": "Books",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k TestBook -rap   ",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 9
+    },
+    {
+      "name": "Textbook",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k TestTextbook -rap",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 18
+    },
+    {
+      "name": "EditedVolume",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k TestEditedVolume -rap ",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 12
+    },
+    {
+      "name": "Publications",
+      "setup": "sudo -H pip3 install pytest",
+      "run": "pytest -k TestPublications -rap",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 10,
+      "points": 12
+    }
+  ]
+}
