@@ -18,7 +18,7 @@ class Publication:
     # with an age of that publication.
     def calculate_base_impact(self, age):
         base = self.number_of_citations / age
-        return base
+        return float(base)
 
     # the age of a publication is found as a difference between the current year (2023) and the publication’s
     # publishing year. If the publishing year is also 2023, the age of the publication is set to 1. lastly,
@@ -49,7 +49,7 @@ class Publication:
         age = self.calculate_age()
         base = self.calculate_base_impact(age)
         freshness = self.freshness_bump(age)
-        return base + freshness
+        return float(base + freshness)
 
 
 '''
@@ -66,7 +66,7 @@ class Article(Publication):
     # already has the freshness bump added, so we can just return the base
     def estimate_impact(self):
         impact = super().estimate_impact()
-        return impact
+        return float(impact)
 
 
 '''
@@ -91,7 +91,7 @@ class ConferenceProceeding(Article):
         article_base = super().estimate_impact()
         if self.conference_location == "Seattle, WA":
             article_base += 25
-        return article_base
+        return float(article_base)
 
 
 '''
@@ -115,7 +115,7 @@ class Journal(Article):
     def estimate_impact(self):
         # calls the Article's estimate_impact() method
         article_base = super().estimate_impact()
-        return article_base * 2
+        return float(article_base * 2)
 
 
 '''
@@ -137,7 +137,7 @@ class Book(Publication):
     def estimate_impact(self):
         # calls the Publication's estimate_impact() method
         base = super().estimate_impact() * 4
-        return base
+        return float(base)
 
 
 '''
@@ -159,7 +159,7 @@ class Textbook(Book):
         # if a textbook has at least 200 pages and no more than 500 pages, then the total impact is increased by 50.
         if 200 <= self.number_of_pages <= 500:
             book_base += 50
-        return book_base
+        return float(book_base)
 
 
 '''
@@ -184,4 +184,4 @@ class EditedVolume(Book):
         # if an edited volume has at least 10 editors, then the total impact is increased by 25.
         if len(self.editors) >= 10:
             book_base += 25
-        return book_base
+        return float(book_base)
