@@ -98,27 +98,27 @@ class TestTextbook:
     def test_simple_textbook(self):
         pub = Textbook("some title", ["author1", "author2"], 2012, 25, "PubCompany1", 150)
         ## (25 citations/ 11 yr)  * 4 [book]
-        assert pub.estimate_impact() == approx(9.09090909)
+        assert pub.estimate_impact == approx(9.09090909)
 
     def test_short_old_textbook(self):
         pub = Textbook("some title", ["author1", "author2"], 2013, 100, "PubCompany1", 50)
         ## (10 citations/ 1 yr)  * 4 [book]
-        assert pub.estimate_impact() == 40
+        assert pub.estimate_impact == 40
 
     def test_long_old_textbook(self):
         pub = Textbook("some title", ["author1", "author2"], 2013, 100, "PubCompany1", 1000)
         ## (100 citations / 10 yrs) * 4 [book]
-        assert pub.estimate_impact() == 40
+        assert pub.estimate_impact == 40
 
     def test_happylength_old_textbook(self):
         pub = Textbook("some title", ["author1", "author2"], 2013, 100, "PubCompany1", 300)
         ## (100 citations / 10 yrs old) * 4 + 50
-        assert pub.estimate_impact() == 90
+        assert pub.estimate_impact == 90
 
     def test_happylength_recent_textbook(self):
         pub = Textbook("some title", ["author1", "author2"], 2023, 10, "PubCompany1", 300)
         ## (10 cit / 1 yrs) + 100 [recent] * 4 [book] + 50 [length]
-        assert pub.estimate_impact() == 490
+        assert pub.estimate_impact == 490
 
     def test_old_textbook_throws_error(self):
         pub = Textbook("some title", ["author1", "author2"], 1772, 100, "Publisher", 150)
@@ -126,23 +126,27 @@ class TestTextbook:
             pub.estimate_impact()
 
 
+# I had to add the editors list
 class TestEditedVolume:
     def test_simple_edited_vol(self):
-        pub = EditedVolume("some title", ["author1", "author2"], 2013, 100, "PubCompany1", 150)
+        pub = EditedVolume("some title", ["author1", "author2"], 2013, 100, "PubCompany1", 150, ["ed1", "ed2"])
         ## (100 citations/ 10 yr)  * 4 [book]
         assert pub.estimate_impact() == 40
 
     def test_recent_edited_vol(self):
-        pub = EditedVolume("some title", ["author1", "author2"], 2023, 10, "PubCompany1", 150)
+        pub = EditedVolume("some title", ["author1", "author2"], 2023, 10, "PubCompany1", 150, ["ed1"])
         ## (10 citations/ 1 yr) + 100 [recent] * 4 [book]
         assert pub.estimate_impact() == 440
 
     def test_recent_edited_vol_many_authors(self):
-        pub = EditedVolume("some title", ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11"], 2023, 10, "PubCompany1", 150)
+        pub = EditedVolume("some title", ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11"], 2023, 10,
+                           "PubCompany1", 150,
+                           ["ed1", "ed2", "ed3", "ed4", "ed5", "ed6", "ed7", "ed8", "ed9", "ed10", "ed11", "ed12",
+                            "ed13"])
         ## (10 citations / 1 yr) + 100 [recent] * 4 [book] + 25 [editors]
         assert pub.estimate_impact() == 465
 
     def test_old_edited_vol_throws_error(self):
-        pub = EditedVolume("some title", ["author1", "author2"], 1772, 100, "Publisher", 50)
+        pub = EditedVolume("some title", ["author1", "author2"], 1772, 100, "Publisher", 50, ["ed1", "ed2"])
         with pytest.raises(NotImplementedError):
             pub.estimate_impact()
